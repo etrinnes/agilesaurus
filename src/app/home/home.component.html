@@ -1,0 +1,31 @@
+<nav>
+    <!-- <button routerLink="/voting">Begin Voting Session</button> -->
+    <div class="text-center">
+        <h1 class="fs-1 agile-header pt-5">Agilesaurus</h1>
+        <h2 class="fs-2 agile-subheader">A dino-mite estimation tool</h2>
+        <img src="../../assets/images/sauropelta.svg" class="img-fluid dino-logo" alt="Sauropelta">
+    </div>
+    <form class="row g-3 needs-validation text-center" novalidate>
+        <!-- <div class="mb-3">
+            <input class="form-control" type="text" placeholder="Story name (optional)" aria-label="story name input">
+        </div> -->
+        <div class="mb-3">
+            <p class="fs-5 agile-subheader">What pointing format are we using today?</p>
+            <div class="input-group has-validation pointing-dropdown">
+                <!-- <label for="pointingOption">Pointing Type</label> -->
+                <select class="dino-select" id="pointingOption" class="form-select" aria-label="Pointing type" name="pointingOption" [(ngModel)]="pointingOption">
+                    <option class="dino-option" value="fib">Fibonacci sequence (1, 2, 3, 5, 8, 13)</option>
+                    <option value="dinos">Dinosaurs</option>
+                </select>
+                <div class="invalid-feedback">
+                    Please choose a pointing format.
+                </div>
+            </div>
+        </div>
+        <div class="mb-3">
+            <!-- routerLink="/voting" -->
+        <button type="button" class="btn btn-primary btn-lg dino-button" (click)="createVotingSession()">Begin Voting Session</button>
+        </div>
+    </form>
+
+</nav>

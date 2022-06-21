@@ -1,0 +1,15 @@
+/* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: simpel;
+    src: url("Simpel-Medium.otf") format("opentype");
+}
+
+@font-face {
+    font-family: simpel;
+    font-weight: bold;
+    src: url("Simpel-Medium.otf") format("opentype");
+}
+
+*{
+    font-family: simpel;
+}

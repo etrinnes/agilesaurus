@@ -1,0 +1,74 @@
+.dino-logo{
+    width: 40%;
+}
+
+.agile-header{
+    //color: #006E5E;
+    color: #42915F;
+}
+
+.agile-subheader{
+    color: #006E5E;
+}
+
+.pointing-dropdown{
+    width: 40%;
+    text-align: center;
+    display: inline-flex;
+}
+
+.dino-button{
+    background-color: #42915F;
+    border-color: #42915F;
+}
+
+.dino-button:hover{
+    background-color: #83B461;
+    //background-color: #42915F;
+    border-color: #42915F;
+    outline: #006E5E !important;
+    box-shadow:  0 0 0 5px rgba(0, 110, 94, 0.2) !important;
+}
+
+.dino-button:active{
+    //background-color: #42915F;
+    background-color: #83B461;
+    border-color: #42915F;
+    outline: #006E5E !important;
+    box-shadow:  0 0 0 5px rgba(0, 110, 94, 0.2) !important;
+}
+
+
+.dino-button:focus{
+    //background-color: #42915F;
+    background-color: #83B461;
+    border-color: #42915F;
+    outline: #006E5E 10px !important;
+    box-shadow:  0 0 0 5px rgba(0, 110, 94, 0.2) !important;
+}
+
+.dino-select:active{
+    outline: #006E5E 10px !important;
+    border-color: #42915F;
+    box-shadow:  0 0 0 5px rgba(0, 110, 94, 0.2) !important;
+}
+
+.dino-select:focus{
+    outline: #006E5E 10px !important;
+    border-color: #42915F;
+    box-shadow:  0 0 0 5px rgba(0, 110, 94, 0.2) !important;
+}
+
+
+.dino-select:active{
+    outline: #006E5E 10px !important;
+    border-color: #42915F;
+    box-shadow:  0 0 0 5px rgba(0, 110, 94, 0.2) !important;
+}
+
+.form-select:focus{
+    outline: #006E5E 10px !important;
+    border-color: #42915F;
+    //box-shadow:  0 0 0 5px rgba(0, 110, 94, 0.2) !important;
+    box-shadow:  0 0 0 5px rgba(255, 203, 0, 0.4) !important;
+}

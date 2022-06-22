@@ -174,6 +174,8 @@ export class VotingComponent implements OnInit {
       this.isSessionActive = val.isActive;
       this.totalVotes = val.votes;
 
+      this.totalVotes = this.sortVotes(this.totalVotes);
+
       if(!this.isSessionActive){
         this.selectedVote = "";
       }
@@ -201,6 +203,20 @@ export class VotingComponent implements OnInit {
   copyUrlToClipboard() : void{
     navigator.clipboard.writeText(this.url);
   }
+
+  sortVotes(votes: VoteModel[]) : VoteModel[]{
+    let sortedArray: VoteModel[] = votes.sort((model1, model2) => {
+      if (model1.votes > model2.votes) {
+          return -1;
+      }
+      if (model1.votes < model2.votes) {
+          return 1;
+      }
+      return 0;
+    });
+    return sortedArray;
+  }
+  
 
 }
 

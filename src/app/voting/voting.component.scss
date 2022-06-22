@@ -97,3 +97,30 @@
     background-color: white;
 }
 
+.copy-icon{
+    background-image: url(../../assets/images/copy-icon.svg);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    max-width: 1em;
+    border: none;
+    background-color: white;
+    width: 24px;
+    height: 26px;
+}
+
+.copy-icon:hover{
+    border-color: #42915F;
+    box-shadow:  0 0 0 3px rgba(0, 110, 94, 0.2) !important;
+}
+
+.copy-icon:active{
+    background-color: #83B461;
+    border-color: #42915F;
+    outline: #006E5E 10px !important;
+    box-shadow:  0 0 0 5px rgba(0, 110, 94, 0.2) !important;
+}
+
+.copy-url{
+    border: solid #006E5E;
+    border-radius: 5px;
+}

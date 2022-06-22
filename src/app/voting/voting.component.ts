@@ -3,6 +3,7 @@ import { VotingService } from '../voting.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { VoteModel, VoteOption, VoteType } from '../session';
 import { VoteTypeService } from '../vote-type.service';
+import * as bootstrap from "bootstrap";
 
 @Component({
   selector: 'app-voting',
@@ -15,6 +16,8 @@ export class VotingComponent implements OnInit {
   private votingType: VoteType;
   isOwner: boolean;
   statusText : string = "Loading";
+  copyTitle : string = "Copy to Clipboard";
+  url: string = "";
   voteType : VoteType;
   voteOptions: VoteOption[];
   votes: { [name: string]: number } = {};
@@ -40,9 +43,16 @@ export class VotingComponent implements OnInit {
    let savedUserId = this.getCookieValue("agilesaurusUserId");
    let savedisOwner = this.getCookieValue("agilesaurusIsOwner");
 
+   let tooltips = document.querySelectorAll('[data-toggle="tooltip"]');
+   for(let i = 0; i < tooltips.length; i++) {
+     let tooltip = new bootstrap.Tooltip(tooltips[i]);
+   }   
+
     this.route.params.subscribe((params) => {
       this.currentSession = params['id'];
     });
+
+    this.url = window.location.href;
 
     this.isValidSession(this.currentSession).then((isValid : boolean) => {
       if(!isValid)
@@ -186,6 +196,10 @@ export class VotingComponent implements OnInit {
 
   getImage(name: string) : string{
     return this.voteTypeService.getImagePath(name);
+  }
+
+  copyUrlToClipboard() : void{
+    navigator.clipboard.writeText(this.url);
   }
 
 }

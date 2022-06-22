@@ -8,6 +8,10 @@
   <div *ngIf="!this.isLoading" class="container">
     <div class="container status-container mt-4">
       <p class="fs-6">{{this.statusText}}</p>
+      <div>
+        <p class="fs-4">Invite your friends! <button class="copy-icon" id="copy-button" (click)="copyUrlToClipboard()" data-toggle="tooltip" data-placement="bottom" title="{{this.copyTitle}}"></button></p>
+        <!-- <p class="fs-6 ">{{this.url}}<button class="copy-icon"></button></p> -->
+      </div>
       <p class="fs-4">Number of players: {{this.playerCount}}</p>
       <!-- <p class="fs-2">Number of submitted votes {{this.numberOfSubmittedVotes}}</p> -->
       <p class="fs-4">{{this.numberOfSubmittedVotes}}/{{this.playerCount}} people have voted.</p>

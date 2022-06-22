@@ -34,7 +34,7 @@
 
 .status-container{
     border: solid #006E5E;
-    width: 40%;
+    max-width: 40em;
     height: auto;
     text-align: center;
     padding: 10px;
@@ -47,6 +47,21 @@
 
 .dino-container{
     margin-bottom: 10rem;
+}
+
+.dino-col{
+    min-width: 16em;
+    margin-top: 2em;
+
+    @media (min-width: 768px) and (max-width: 991px) {
+        margin-left: 3em;
+        margin-right: 3em;
+    }
+}
+
+.dino-card{
+    min-width: 20em;
+    align-self: center;
 }
 
 .dino-card:focus{
@@ -81,3 +96,4 @@
 .not-selected{
     background-color: white;
 }
+

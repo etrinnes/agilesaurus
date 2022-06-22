@@ -33,10 +33,10 @@ export class VoteTypeService {
             voteOptions = [
                 {id: "microraptor", imagePath: "../../assets/images/alvarezsaurus.svg", title: "Microraptor", description: "A very tiny dino!", style:"width: 14em;"},
                 {id: "velociraptor", imagePath: "../../assets/images/velociraptor.svg", title: "Velociraptor", description: "Pretty small", style:"width: 14em;"},
-                {id: "triceratops", imagePath: "../../assets/images/triceratops.svg", title: "Triceratops", description: "Medium", style:"width: 18em;"},
-                {id: "trex", imagePath: "../../assets/images/tyrannosaurus.svg", title: "T. Rex", description: "Large", style:"width: 18em;"},
-                {id: "brachiosaurus", imagePath: "../../assets/images/brachiosaurus.svg", title: "Brachiosaurus", description: "Giant!", style:"width: 20em;"},
-                {id: "meteor", imagePath: "../../assets/images/meteor.svg", title: "Meteor!", description: "Bad things are gonna happen with this one...", style:"width: 20em;"}
+                {id: "triceratops", imagePath: "../../assets/images/triceratops.svg", title: "Triceratops", description: "Medium", style:"width: 16em;"},
+                {id: "trex", imagePath: "../../assets/images/tyrannosaurus.svg", title: "T. Rex", description: "Large", style:"width: 16em;"},
+                {id: "brachiosaurus", imagePath: "../../assets/images/brachiosaurus.svg", title: "Brachiosaurus", description: "Giant!", style:"width: 16em;"},
+                {id: "meteor", imagePath: "../../assets/images/meteor.svg", title: "Meteor!", description: "Bad things are gonna happen with this one...", style:"width: 16em;"}
             ];
             break;
         default:

@@ -7,7 +7,7 @@
   </div>
   <div *ngIf="!this.isLoading" class="container">
     <div class="container status-container mt-4">
-      <p class="fs-5">{{this.statusText}}</p>
+      <p class="fs-6">{{this.statusText}}</p>
       <p class="fs-4">Number of players: {{this.playerCount}}</p>
       <!-- <p class="fs-2">Number of submitted votes {{this.numberOfSubmittedVotes}}</p> -->
       <p class="fs-4">{{this.numberOfSubmittedVotes}}/{{this.playerCount}} people have voted.</p>
@@ -45,7 +45,7 @@
       </div>
     </div>
     
-    <div *ngIf="this.isSessionActive && !this.shouldDisplayCards" class="container">
+    <div *ngIf="this.isSessionActive && !this.shouldDisplayCards" class="container dino-container">
       <div  class="d-grid gap-2 col-6 mx-auto mb-3" *ngFor="let item of this.voteOptions">
         <button class="btn btn-primary btn-lg dino-button" *ngIf="!this.shouldDisplayCards" type="button" id="{{item.id}}" (click)="addVote(item.id)">{{item.id}}</button>
 
@@ -67,8 +67,8 @@
     </div>
     <div *ngIf="this.isSessionActive && this.shouldDisplayCards" class="container dino-container">
       <div class="row" >
-        <div class="col m-5" *ngFor="let item of this.voteOptions">
-          <div class="card d-flex flex-column dino-card" [ngClass]="item.id == this.selectedVote ? 'selected-dino' : 'not-selected'" type="button" style="max-width: 25rem; height: 25rem;" (click)="addVote(item.id)">
+        <div class="col-md-4 dino-col d-flex flex-column" *ngFor="let item of this.voteOptions">
+          <div class="card d-flex flex-column dino-card" [ngClass]="item.id == this.selectedVote ? 'selected-dino' : 'not-selected'" type="button" style="max-width: 20rem; height: 25rem;" (click)="addVote(item.id)">
             <div class="container mt-auto" style="{{item.style}}">
               <img class="card-img-top" src="{{item.imagePath}}" alt="{{item.description}}">
             </div>

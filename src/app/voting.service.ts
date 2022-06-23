@@ -7,6 +7,7 @@ import { deleteField, onSnapshot, updateDoc } from "firebase/firestore";
 import { Observable, Subject, Subscriber } from 'rxjs';
 import { VoteModel, VoteType, VotingSession } from './session';
 import { VoteTypeService } from './vote-type.service';
+import { environment } from 'src/environments/environment';
 
 // @Injectable({
 //   providedIn: 'root'
@@ -15,14 +16,14 @@ import { VoteTypeService } from './vote-type.service';
 export class VotingService {
 
   firebaseConfig = {
-    apiKey: "AIzaSyBnLp-ETayV5uGL6xxQAYhAI6RZD-_CL8Y",
-    authDomain: "agilesaurus-12821.firebaseapp.com",
-    databaseURL: "https://agilesaurus-12821-default-rtdb.firebaseio.com",
-    projectId: "agilesaurus-12821",
-    storageBucket: "agilesaurus-12821.appspot.com",
-    messagingSenderId: "1004375862252",
-    appId: "1:1004375862252:web:6d2d20f7fe06ecac72aec9",
-    measurementId: "G-6NX6VXVGP8"
+    apiKey: environment.APIKEY,
+    authDomain: environment.AUTHDOMAIN,
+    databaseURL: environment.DBURL,
+    projectId: environment.PROJECTID,
+    storageBucket: environment.STORAGEBUCKET,
+    messagingSenderId: environment.MESSAGINGSENDERID,
+    appId: environment.APPID,
+    measurementId: environment.MEASUREMENTID
   };
 
   private app: FirebaseApp;

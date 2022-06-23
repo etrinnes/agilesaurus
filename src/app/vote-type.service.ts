@@ -39,6 +39,38 @@ export class VoteTypeService {
                 {id: "meteor", imagePath: "../../assets/images/meteor.svg", title: "Meteor!", description: "Bad things are gonna happen with this one...", style:"width: 16em;"}
             ];
             break;
+        case VoteType.Fib:
+          voteOptions = [
+            {id: "1", imagePath: "", title: "", description: ""},
+            {id: "2", imagePath: "", title: "", description: ""},
+            {id: "3", imagePath: "", title: "", description: ""},
+            {id: "5", imagePath: "", title: "", description: ""},
+            {id: "8", imagePath: "", title: "", description: ""},
+            {id: "13", imagePath: "", title: "", description: ""},
+          ];
+          break;
+        case VoteType.Incr:
+          voteOptions = [
+            {id: "1", imagePath: "", title: "", description: ""},
+            {id: "2", imagePath: "", title: "", description: ""},
+            {id: "3", imagePath: "", title: "", description: ""},
+            {id: "4", imagePath: "", title: "", description: ""},
+            {id: "5", imagePath: "", title: "", description: ""},
+            {id: "6", imagePath: "", title: "", description: ""},
+            {id: "7", imagePath: "", title: "", description: ""},
+            {id: "8", imagePath: "", title: "", description: ""},
+          ];
+          break;
+        case VoteType.TShirt:
+          voteOptions = [
+            {id: "XS", imagePath: "", title: "", description: ""},
+            {id: "S", imagePath: "", title: "", description: ""},
+            {id: "M", imagePath: "", title: "", description: ""},
+            {id: "L", imagePath: "", title: "", description: ""},
+            {id: "XL", imagePath: "", title: "", description: ""},
+            {id: "XXL", imagePath: "", title: "", description: ""}
+          ];
+          break;
         default:
             voteOptions = [
                 {id: "1", imagePath: "", title: "", description: ""},
@@ -93,9 +125,18 @@ export class VoteTypeService {
         case VoteType.Dinos:
             return ["microraptor", "velociraptor", "triceratops", "trex", "brachiosaurus", "meteor"];
             break;
+        case VoteType.Fib:
+          return ["1", "2", "3", "5", "8", "13"];
+          break;
+        case VoteType.Incr:
+          return ["1", "2", "3", "4", "5", "6", "7", "8"];
+          break;
+        case VoteType.TShirt:
+          return ["XS", "S", "M", "L", "XL", "XXL"];
+          break;
         default:
-            return ["1", "2", "3", "5", "8", "13"];
-            break;
+          return ["1", "2", "3", "5", "8", "13"];
+          break;
     }
   }
 

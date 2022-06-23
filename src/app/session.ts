@@ -20,6 +20,8 @@ export interface VoteOption{
 
 export enum VoteType{
     Fib = "fib",
-    Dinos = "dinos"
+    Dinos = "dinos",
+    Incr = "incremental",
+    TShirt = "tshirt"
 }
 

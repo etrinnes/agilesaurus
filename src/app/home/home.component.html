@@ -14,8 +14,10 @@
             <div class="input-group has-validation pointing-dropdown">
                 <!-- <label for="pointingOption">Pointing Type</label> -->
                 <select class="dino-select" id="pointingOption" class="form-select" aria-label="Pointing type" name="pointingOption" [(ngModel)]="pointingOption">
-                    <option class="dino-option" value="fib">Fibonacci sequence (1, 2, 3, 5, 8, 13)</option>
                     <option value="dinos">Dinosaurs</option>
+                    <option class="dino-option" value="fib">Fibonacci sequence (1, 2, 3, 5, 8, 13)</option>
+                    <option class="dino-option" value="incremental">Incremental sequence (1, 2, 3, 4, 5, 6, 7, 8)</option>
+                    <option class="dino-option" value="tshirt">T-shirt sizes (XS, S, M, L, XL, XXL)</option>
                 </select>
                 <div class="invalid-feedback">
                     Please choose a pointing format.

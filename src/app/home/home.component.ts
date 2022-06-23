@@ -11,28 +11,31 @@ export class HomeComponent implements OnInit {
   private currentSession: string;
   private currentUserId: string;
   pointingOption: string;
+  invalidModel: boolean;
 
   constructor(private votingService: VotingService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.invalidModel = false;
     this.votingService.initializeStuff();
   }
 
   createVotingSession(): void{
-    console.log("in here");
-    this.votingService.createNewSession(this.pointingOption).then((sessionId) => {
-      this.currentSession = sessionId;
-      //this.router.navigateByUrl('/voting', { state: { id: this.currentSession , votingType: this.pointingOption, isOwner: true}, id: this.currentSession});
-      //this.router.navigateByUrl(['/voting', { id: this.currentSession }]);
-      this.router.navigate(['/voting', { id: this.currentSession }], { state: { votingType: this.pointingOption, isOwner: true}});
-    });
-
-
-    //this.route.navigate(['voting']);
-    //this.joinSession(this.currentSession, true);
+    if(this.pointingOption){
+      this.invalidModel = false;
+      this.votingService.createNewSession(this.pointingOption).then((sessionId) => {
+        this.currentSession = sessionId;
+        this.router.navigate(['/voting', { id: this.currentSession }], { state: { votingType: this.pointingOption, isOwner: true}});
+      });
+    }
+    else{
+      this.invalidModel = true;
+    }
   }
 
-  // selectedPointingOption(): void{
-  // }
-
+  optionChanged(): void{
+    if(this.pointingOption){
+      this.invalidModel = false;
+    }
+  }
 }

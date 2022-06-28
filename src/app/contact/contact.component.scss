@@ -1,0 +1,92 @@
+.contact-header{
+    color: #006E5E;
+}
+
+.contact-form{
+    width: 70%;
+    margin: auto;
+}
+
+.image-container{
+    max-width: 10em;
+    margin-bottom: 2em;
+}
+
+.dino-col{
+    margin: 0;
+    padding: 0;
+}
+
+.laptop-col{
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+
+.dino-email{
+    max-width: 5em;
+}
+
+.laptop{
+    max-width: 3em;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.dino-button{
+    background-color: #42915F;
+    border-color: #42915F;
+    margin-bottom: 10em;
+}
+
+.dino-button:hover{
+    background-color: #83B461;
+    //background-color: #42915F;
+    border-color: #42915F;
+    outline: #006E5E !important;
+    box-shadow:  0 0 0 5px rgba(0, 110, 94, 0.2) !important;
+    margin-bottom: 10em;
+}
+
+.dino-button:active{
+    //background-color: #42915F;
+    background-color: #83B461;
+    border-color: #42915F;
+    outline: #006E5E !important;
+    box-shadow:  0 0 0 5px rgba(0, 110, 94, 0.2) !important;
+    margin-bottom: 10em;
+}
+
+
+.dino-button:focus{
+    //background-color: #42915F;
+    background-color: #83B461;
+    border-color: #42915F;
+    outline: #006E5E 10px !important;
+    box-shadow:  0 0 0 5px rgba(0, 110, 94, 0.2) !important;
+    margin-bottom: 10em;
+}
+
+.invalid-info{
+    color: red;
+}
+
+.dino-input:active{
+    outline: #006E5E 10px !important;
+    border-color: #42915F;
+    box-shadow:  0 0 0 5px rgba(0, 110, 94, 0.2) !important;
+}
+
+.dino-input:focus{
+    outline: #006E5E 10px !important;
+    border-color: #42915F;
+    box-shadow:  0 0 0 5px rgba(0, 110, 94, 0.2) !important;
+}
+
+
+.dino-input:active{
+    outline: #006E5E 10px !important;
+    border-color: #42915F;
+    box-shadow:  0 0 0 5px rgba(0, 110, 94, 0.2) !important;
+}

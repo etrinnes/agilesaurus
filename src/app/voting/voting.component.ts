@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { VoteModel, VoteOption, VoteType } from '../session';
 import { VoteTypeService } from '../vote-type.service';
 import * as bootstrap from "bootstrap";
+import { ChartType } from 'angular-google-charts';
 
 @Component({
   selector: 'app-voting',
@@ -174,7 +175,7 @@ export class VotingComponent implements OnInit {
       this.isSessionActive = val.isActive;
       this.totalVotes = val.votes;
 
-      this.totalVotes = this.sortVotes(this.totalVotes);
+     // this.totalVotes = this.sortVotes(this.totalVotes);
 
       if(!this.isSessionActive){
         this.selectedVote = "";

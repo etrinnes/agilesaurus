@@ -1,0 +1,56 @@
+<div class="mb-4">
+    <h2 class="h1-responsive font-weight-bold text-center m-4 contact-header">Contact</h2>
+    <div class="container image-container">
+        <div class="row row-cols-2">
+          <div class="col laptop-col">
+            <img src="../../assets/images/email-laptop.svg" class="laptop">
+          </div>
+          <div class="col dino-col">
+            <img src="../../assets/images/dino-email.svg" class="dino-email">
+          </div>
+        </div>
+      </div>
+    <div class="row contact-form">
+        <div class="mb-md-0 mb-5">
+            <form id="contact-form" name="contact-form">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="md-form mb-4">
+                            <input type="text" id="name" name="name" class="form-control dino-input" [(ngModel)]="name" (change)="optionChanged()">
+                            <label for="name" class="">Your name</label>
+                            <p *ngIf="!isNameValid" class="invalid-info">Please enter a name</p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="md-form mb-4">
+                            <input type="text" id="email" name="email" class="form-control dino-input" [(ngModel)]="email" (change)="optionChanged()">
+                            <label for="email" class="">Your email</label>
+                            <p *ngIf="!isEmailValid" class="invalid-info">Please enter an email</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="md-form mb-4">
+                            <input type="text" id="subject" name="subject" class="form-control dino-input" [(ngModel)]="subject">
+                            <label for="subject" class="">Subject</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="md-form mb-4">
+                            <textarea type="text" id="message" name="message" rows="5" class="form-control md-textarea dino-input" [(ngModel)]="message" (change)="optionChanged()"></textarea>
+                            <label for="message">Message</label>
+                            <p *ngIf="!isMessageValid" class="invalid-info">Please enter a message.</p>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="text-center text-md-left">
+                <button class="btn btn-primary btn-lg mb-4 dino-button" (click)="submit()">Send</button>
+            </div>
+            <div class="status"></div>
+        </div>
+    </div>
+</div>

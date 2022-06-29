@@ -96,7 +96,7 @@ export class VoteTypeService {
     let votes : VoteModel[] = [];
     let voteOptions = this.getPointTypeList(sessionType);
     voteOptions.forEach(voteOption => {
-        votes.push({point: voteOption, votes: 0});
+        votes.push({point: voteOption, votes: 0, color: this.getChartColor(voteOptions.indexOf(voteOption))});
     });
     return votes;
   }
@@ -120,6 +120,44 @@ export class VoteTypeService {
     }
   }
 
+  getChartColor(index: number) : string{
+    switch(index){
+      case 0:
+          return "#801c80";
+      case 1:
+          return "#c96033";
+      case 2:
+          return "#ffb308";
+      case 3:
+          return "#006e5e";
+      case 4:
+          return "#83b461";
+      case 5:
+          return "#e9563f";
+      default:
+          return "#e9563f";
+    }
+  }
+
+  // getChartColor(name: string) : string{
+  //   switch(name){
+  //     case "microraptor":
+  //         return "#801c80";
+  //     case "velociraptor":
+  //         return "#c96033";
+  //     case "triceratops":
+  //         return "#ffb308";
+  //     case "trex":
+  //         return "#006e5e";
+  //     case "brachiosaurus":
+  //         return "#83b461";
+  //     case "meteor":
+  //         return "#e9563f";
+  //     default:
+  //         return "#e9563f";
+  //   }
+  // }
+
   private getPointTypeList(sessionType: string): string[]{
     switch(sessionType){
         case VoteType.Dinos:
@@ -129,7 +167,7 @@ export class VoteTypeService {
           return ["1", "2", "3", "5", "8", "13"];
           break;
         case VoteType.Incr:
-          return ["1", "2", "3", "4", "5", "6", "7", "8"];
+          return ["1", "2", "3", "4", "5", "6"];
           break;
         case VoteType.TShirt:
           return ["XS", "S", "M", "L", "XL", "XXL"];

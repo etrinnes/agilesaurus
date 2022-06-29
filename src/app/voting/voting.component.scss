@@ -1,4 +1,5 @@
 .table-results{
+    max-width: 230px;
     width: 50%;
     margin: auto;
     margin-bottom: 10rem;
@@ -124,4 +125,9 @@
 .copy-url{
     border: solid #006E5E;
     border-radius: 5px;
+}
+
+.table-image{
+    width: 100px;
+    height: 150px;
 }

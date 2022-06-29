@@ -54,7 +54,6 @@ export class VotingService {
       isActive: false,
       votes: [{point: '1', votes: 0}, {point: '2', votes: 0}, {point: '3', votes: 0}, {point: '5', votes: 0}, {point: '8', votes: 0}, {point: '13', votes: 0}]
     }
-   // this.db = getDatabase(this.app);
   }
 
   getSessionSubject(): Subject<VotingSession>{
@@ -140,34 +139,18 @@ export class VotingService {
       console.error("Error adding doc ", e);
       return "";
     }
-    // set(ref(this.db, 'session/' + sessionId), {
-    //   userId: userId
-    // });
   }
 
   
   async addVote(sessionId: string, userId: string, submittedVote: number | string): Promise<void>{
     try{
-      // await addDoc(collection(this.db, "users"), {
-      //   userId: "blah" + randomInt(500)
-      // })
-      // await addDoc(collection(this.db, "users", userId), {
-      //   vote: vote
-      // });
-
       let docRef = doc(this.db, "sessions", sessionId, "users", userId);
       setDoc(docRef, {vote: submittedVote}, {merge: true});
       this.updateVoteTotals(sessionId, submittedVote);
-      // await addDoc(collection(this.db, "sessions", sessionId, "users"), {
-      //   vote: vote
-      // });
     }
     catch(e){
       console.error("Error adding doc ", e);
     }
-    // set(ref(this.db, 'session/' + sessionId), {
-    //   userId: userId
-    // });
   }
 
   async resetVotes(sessionId: string) : Promise<boolean>{
@@ -180,8 +163,6 @@ export class VotingService {
 
         let userDocRef = doc(this.db, "sessions", sessionId, "users", snap.id);
         await updateDoc(userDocRef, {vote: deleteField()});
-
-        //votes[vote.toString()] = votes[vote.toString()] + 1;
       });
 
 
@@ -202,33 +183,6 @@ export class VotingService {
       this.sessionModel.isActive = true;
 
       return true;
-
-
-      // let querySnapshot = await getDocs(collection(this.db, "sessions", sessionId, "users"));
-      // querySnapshot.forEach((doc) => {
-      //   console.log(doc.id, " => ", doc.data());
-      //   let data = doc.data();
-      //   let vote : string = data['vote'];
-
-      //   votes.forEach(item => {
-      //     if(item.point == vote){
-      //       item.votes++;
-      //       numberOfVotes++;
-      //     }
-      //   })
-
-      // });
-      
-
-
-      // let docRef = doc(this.db, "sessions", sessionId);
-      // let docSnap = await getDoc(docRef);
-      // if (docSnap.exists()) {
-      //   let data = docSnap.data();
-
-      //   setDoc(docRef, {totalVotes: votes, numberOfVotes: numberOfVotes}, {merge: true});
-      //   return true;
-      // }
     }
     catch(e){
       return false;
@@ -239,9 +193,6 @@ export class VotingService {
 
   async getSessionType(sessionId: string): Promise<string>{
     try{
-      // await addDoc(collection(this.db, "users"), {
-      //   userId: "blah" + randomInt(500)
-      // })
       let docRef = doc(this.db, "sessions", sessionId);
       let docSnap = await getDoc(docRef);
       let data = docSnap.data();
@@ -254,9 +205,6 @@ export class VotingService {
       console.error("Error adding doc ", e);
       return "";
     }
-    // set(ref(this.db, 'session/' + sessionId), {
-    //   userId: userId
-    // });
   }
 
   async endSession(sessionId: string): Promise<boolean>{
@@ -270,39 +218,12 @@ export class VotingService {
       return false;
     }
   }
-
-  // async waitForSessionEnd(sessionId: string): Promise<boolean>{
-  //   const promise : Promise<boolean> =  new Promise<boolean>((resolve, reject) => {
-  //     let docRef = doc(this.db, "sessions", sessionId);
-  //     const unsub = onSnapshot(docRef, (docSnap) => {
-  //       let data = docSnap.data();
-  //       console.log("WHATS THIS!! " + JSON.stringify(data));
-  //       if(data){
-  //         this.sessionModel.userCount = data["numberOfPlayers"];
-  //         this.sessionModel.voteCount = data["numberOfVotes"];
-  //         this.sessionModel.isActive = data["isActive"];
-
-  //         this.userCount.next(data["numberOfPlayers"]);
-  //         this.voteCount.next(data["numberOfVotes"]);
-
-  //         if(data["isActive"] == false){
-  //           resolve(false);
-  //           return;
-  //         }
-  //       } 
-  //       //return;
-  //     });
-  //   });
-  //   return promise;
-  // }
-
   
   async listenForDataChanges(sessionId: string): Promise<void>{
 
     let docRef = doc(this.db, "sessions", sessionId);
     const unsub = onSnapshot(docRef, (docSnap) => {
       let data = docSnap.data();
-      console.log("WHATS THIS!! " + JSON.stringify(data));
       if(data){
         this.sessionModel.userCount = data["numberOfPlayers"];
         this.sessionModel.voteCount = data["numberOfVotes"];
@@ -316,57 +237,8 @@ export class VotingService {
   }
 
 
-  // async listenForNewUsersJoining(sessionId: string): Promise<Observable<number>>{
-
-  //   let observable = new Observable((observer) => {
-
-  //     let docRef = doc(this.db, "sessions", sessionId, "users");
-  //     const unsub = onSnapshot(docRef, async (docSnap) => {
-  //       let data = docSnap.data();
-  //       let idk = collection(this.db, "sessions", sessionId, "users");
-
-  //       let querySnapshot = await getDocs(collection(this.db, "sessions", sessionId, "users"));
-  //       querySnapshot.size;
-
-  //       docSnap.size;
-  //       observer.next()
-  //       //return;
-  //     });
-
-  //   })
-
-  //   const promise : Promise<boolean> =  new Promise<boolean>((resolve, reject) => {
-  //     let docRef = doc(this.db, "sessions", sessionId);
-  //     const unsub = onSnapshot(docRef, (docSnap) => {
-  //       let data = docSnap.data();
-  //       console.log("WHATS THIS!! " + JSON.stringify(data));
-  //       if(data && data["isActive"] == false){
-  //         resolve(false);
-  //         return;
-  //       }
-  //       //return;
-  //     });
-  //   });
-  //   return promise;
-  // }
-
-
   async updateVoteTotals(sessionId: string, submittedVote: number | string): Promise<boolean>{
     try{
-      //this.initializeStuff();
-      // let votes : { [key: string]: number } = {
-
-      // };
-
-      // let votes = {
-      //   '1' : 0,
-      //   '2' : 0,
-      //   '3' : 0,
-      //   '5' : 0,
-      //   '8' : 0,
-      //   '13' : 0
-      // };
-
 
       //let votes : VoteModel[] = [{point: '1', votes: 0}, {point: '2', votes: 0}, {point: '3', votes: 0}, {point: '5', votes: 0}, {point: '8', votes: 0}, {point: '13', votes: 0}];
       let sessionType = await this.getSessionType(sessionId);

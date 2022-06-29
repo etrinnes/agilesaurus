@@ -56,8 +56,7 @@ export class VotingComponent implements OnInit {
     this.url = window.location.href;
 
     this.isValidSession(this.currentSession).then((isValid : boolean) => {
-      if(!isValid)
-      {
+      if(!isValid){
         this.router.navigate(['/notfound']);
       }
       else{
@@ -68,15 +67,6 @@ export class VotingComponent implements OnInit {
           this.isSessionActive = true;
           this.statusText = `Joined session ${this.currentSession}`;
           this.handleSessionData(this.votingType, false);
-          // this.votingService.initializeStuff();
-          // this.votingService.getSessionType(this.currentSession).then((sessionType) => {
-          //   this.votingType = sessionType as VoteType;
-          //   this.totalVotes = this.voteTypeService.getVoteModel(this.votingType); // is this needed?
-          //   this.voteOptions = this.voteTypeService.getVoteOptions(this.votingType);
-          //   this.shouldDisplayCards = this.votingType == VoteType.Dinos; 
-          //   this.isLoading = false;
-          //   this.listenForSessionData();
-          // });
         }
         else {
           deleteCookies();
@@ -86,19 +76,6 @@ export class VotingComponent implements OnInit {
             this.currentSession = params['id'];
           });
           this.handleSessionData(this.votingType, true);
-    
-          // this.votingService.initializeStuff();
-    
-          // this.votingService.getSessionType(this.currentSession).then((sessionType) => {
-          //   this.votingType = sessionType as VoteType;
-          //   this.totalVotes = this.voteTypeService.getVoteModel(this.votingType);
-          //   this.voteOptions = this.voteTypeService.getVoteOptions(this.votingType);
-          //   this.shouldDisplayCards = this.votingType == VoteType.Dinos; 
-    
-          //   this.listenForSessionData();
-    
-          //   this.joinSession(this.currentSession, this.isOwner);
-          // });
         }
       }
     });
@@ -115,7 +92,7 @@ export class VotingComponent implements OnInit {
       this.votingType = sessionType as VoteType;
       this.totalVotes = this.voteTypeService.getVoteModel(this.votingType);
       this.voteOptions = this.voteTypeService.getVoteOptions(this.votingType);
-      this.shouldDisplayCards = this.votingType == VoteType.Dinos; 
+      this.shouldDisplayCards = this.votingType == VoteType.Dinos || this.votingType == VoteType.Fib; 
 
       this.listenForSessionData();
 
@@ -175,8 +152,6 @@ export class VotingComponent implements OnInit {
       this.isSessionActive = val.isActive;
       this.totalVotes = val.votes;
 
-     // this.totalVotes = this.sortVotes(this.totalVotes);
-
       if(!this.isSessionActive){
         this.selectedVote = "";
       }
@@ -198,7 +173,7 @@ export class VotingComponent implements OnInit {
   }
 
   getImage(name: string) : string{
-    return this.voteTypeService.getImagePath(name);
+    return this.voteTypeService.getImagePath(name, this.votingType);
   }
 
   copyUrlToClipboard() : void{
@@ -217,8 +192,6 @@ export class VotingComponent implements OnInit {
     });
     return sortedArray;
   }
-  
-
 }
 
 function deleteCookies() {

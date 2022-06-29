@@ -41,12 +41,14 @@ export class VoteTypeService {
             break;
         case VoteType.Fib:
           voteOptions = [
-            {id: "1", imagePath: "", title: "", description: ""},
-            {id: "2", imagePath: "", title: "", description: ""},
-            {id: "3", imagePath: "", title: "", description: ""},
-            {id: "5", imagePath: "", title: "", description: ""},
-            {id: "8", imagePath: "", title: "", description: ""},
-            {id: "13", imagePath: "", title: "", description: ""},
+            {id: "1", imagePath: "../../assets/images/number-one.svg", title: "", description: "Tiny", style:"width: 16em;"},
+            {id: "2", imagePath: "../../assets/images/number-two.svg", title: "", description: "Small", style:"width: 16em;"},
+            {id: "3", imagePath: "../../assets/images/number-three.svg", title: "", description: "Medium", style:"width: 16em;"},
+            {id: "5", imagePath: "../../assets/images/number-five.svg", title: "", description: "Medium-Large", style:"width: 16em;"},
+            {id: "8", imagePath: "../../assets/images/number-eight.svg", title: "", description: "Large", style:"width: 16em;"},
+            {id: "13", imagePath: "../../assets/images/number-thirteen.svg", title: "", description: "Giant", style:"width: 16em;"},
+            {id: "?", imagePath: "../../assets/images/question-mark.svg", title: "", description: "I need more info.", style:"width: 16em;"},
+            {id: "break plz", imagePath: "../../assets/images/coffee.svg", title: "", description: "Can we take a break?", style:"width: 16em;"}
           ];
           break;
         case VoteType.Incr:
@@ -73,26 +75,21 @@ export class VoteTypeService {
           break;
         default:
             voteOptions = [
-                {id: "1", imagePath: "", title: "", description: ""},
-                {id: "2", imagePath: "", title: "", description: ""},
-                {id: "3", imagePath: "", title: "", description: ""},
-                {id: "5", imagePath: "", title: "", description: ""},
-                {id: "8", imagePath: "", title: "", description: ""},
-                {id: "13", imagePath: "", title: "", description: ""},
+              {id: "1", imagePath: "../../assets/images/number-one.svg", title: "", description: "Tiny", style:"width: 16em;"},
+              {id: "2", imagePath: "../../assets/images/number-two.svg", title: "", description: "Small", style:"width: 16em;"},
+              {id: "3", imagePath: "../../assets/images/number-three.svg", title: "", description: "Medium", style:"width: 16em;"},
+              {id: "5", imagePath: "../../assets/images/number-five.svg", title: "", description: "Medium-Large", style:"width: 16em;"},
+              {id: "8", imagePath: "../../assets/images/number-eight.svg", title: "", description: "Large", style:"width: 16em;"},
+              {id: "13", imagePath: "../../assets/images/number-thirteen.svg", title: "", description: "Giant", style:"width: 16em;"},
+              {id: "?", imagePath: "../../assets/images/question-mark.svg", title: "", description: "I need more info.", style:"width: 16em;"},
+              {id: "break plz", imagePath: "../../assets/images/coffee.svg", title: "", description: "Can we take a break?", style:"width: 16em;"}
             ];
             break;
     }
-    // if(votingType == VoteType.Fib) {
-    //     voteOptions = [1, 2, 3, 5, 8, 13];
-    // }
-    // else if(votingType == VoteType.Dinos){
-    // voteOptions = ["microraptor", "velociraptor", "triceratops", "t. rex", "brachiosaurus", "meteor"];
-    // }
     return voteOptions;
   }
 
   getVoteModel(sessionType: string) : VoteModel[] {
-    //let votes = [{point: '1', votes: 0}, {point: '2', votes: 0}, {point: '3', votes: 0}, {point: '5', votes: 0}, {point: '8', votes: 0}, {point: '13', votes: 0}];
     let votes : VoteModel[] = [];
     let voteOptions = this.getPointTypeList(sessionType);
     voteOptions.forEach(voteOption => {
@@ -101,7 +98,16 @@ export class VoteTypeService {
     return votes;
   }
 
-  getImagePath(name: string) : string {
+  getImagePath(name: string, votingType: VoteType) : string{
+    switch(votingType){
+      case VoteType.Dinos:
+        return this.getDinoImagePath(name);
+      default:
+        return this.getNumberImagePath(name);
+    }
+  }
+
+  getDinoImagePath(name: string) : string {
     switch(name){
         case "microraptor":
             return "../../assets/images/alvarezsaurus.svg";
@@ -120,6 +126,37 @@ export class VoteTypeService {
     }
   }
 
+  getNumberImagePath(name: string) : string {
+    switch(name){
+        case "1":
+            return "../../assets/images/number-one.svg";
+        case "2":
+            return "../../assets/images/number-two.svg";
+        case "3":
+            return "../../assets/images/number-three.svg";
+        case "4":
+            return "../../assets/images/number-four.svg";
+        case "5":
+            return "../../assets/images/number-five.svg";
+        case "6":
+            return "../../assets/images/number-six.svg";
+        case "7":
+          return "../../assets/images/number-seven.svg";
+        case "8":
+          return "../../assets/images/number-eight.svg";
+        case "9":
+          return "../../assets/images/number-nine.svg";
+        case "13":
+          return "../../assets/images/number-thirteen.svg";
+        case "?":
+          return "../../assets/images/question-mark.svg";
+        case "break plz":
+          return "../../assets/images/coffee.svg";
+        default:
+            return "../../assets/images/question-mark.svg";
+    }
+  }
+
   getChartColor(index: number) : string{
     switch(index){
       case 0:
@@ -134,29 +171,14 @@ export class VoteTypeService {
           return "#83b461";
       case 5:
           return "#e9563f";
+      case 6:
+          return "#4b5f99";
+      case 7:
+          return "#ff8317";
       default:
           return "#e9563f";
     }
   }
-
-  // getChartColor(name: string) : string{
-  //   switch(name){
-  //     case "microraptor":
-  //         return "#801c80";
-  //     case "velociraptor":
-  //         return "#c96033";
-  //     case "triceratops":
-  //         return "#ffb308";
-  //     case "trex":
-  //         return "#006e5e";
-  //     case "brachiosaurus":
-  //         return "#83b461";
-  //     case "meteor":
-  //         return "#e9563f";
-  //     default:
-  //         return "#e9563f";
-  //   }
-  // }
 
   private getPointTypeList(sessionType: string): string[]{
     switch(sessionType){
@@ -164,7 +186,7 @@ export class VoteTypeService {
             return ["microraptor", "velociraptor", "triceratops", "trex", "brachiosaurus", "meteor"];
             break;
         case VoteType.Fib:
-          return ["1", "2", "3", "5", "8", "13"];
+          return ["1", "2", "3", "5", "8", "13", "?", "break plz"];
           break;
         case VoteType.Incr:
           return ["1", "2", "3", "4", "5", "6"];
@@ -173,7 +195,7 @@ export class VoteTypeService {
           return ["XS", "S", "M", "L", "XL", "XXL"];
           break;
         default:
-          return ["1", "2", "3", "5", "8", "13"];
+          return ["1", "2", "3", "5", "8", "13", "?", "break plz"];
           break;
     }
   }

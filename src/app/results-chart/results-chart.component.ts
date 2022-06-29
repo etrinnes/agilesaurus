@@ -64,7 +64,7 @@ export class ResultsChartComponent implements OnInit {
       chart.draw(view, options);
 
       if(votingType == VoteType.Dinos){
-        // add lil dino icons
+        // add lil icons
         var chartContainer = document.getElementById("columnchart_values");
         if(chartContainer){
           var svg = chartContainer.getElementsByTagName('svg')[0];
@@ -76,7 +76,7 @@ export class ResultsChartComponent implements OnInit {
                 let x : string = barArea.getAttribute('x') as string;
                 let y : string = barArea.getAttribute('y') as string;
   
-                let imagePath = this.voteTypeService.getImagePath(barLabels[i].innerHTML);
+                let imagePath = this.voteTypeService.getImagePath(barLabels[i].innerHTML, votingType);
                 if(barLabels[i].innerHTML != "Votes"){
                   (barLabels[i] as HTMLElement).style.paddingBottom = "20px";
                   let icon = createImage({ source: imagePath, x: x, y: y, width: 50, height: 50 });

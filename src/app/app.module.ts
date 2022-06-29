@@ -12,6 +12,8 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { AboutComponent } from './about/about.component';
 import { FaqComponent } from './faq/faq.component';
 import { ContactComponent } from './contact/contact.component';
+import { GoogleChartsModule } from 'angular-google-charts';
+import { ResultsChartComponent } from './results-chart/results-chart.component';
 
 @NgModule({
   declarations: [
@@ -21,12 +23,14 @@ import { ContactComponent } from './contact/contact.component';
     NotFoundComponent,
     AboutComponent,
     FaqComponent,
-    ContactComponent
+    ContactComponent,
+    ResultsChartComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    GoogleChartsModule
   ],
   providers: [VotingService, VoteTypeService],
   bootstrap: [AppComponent]

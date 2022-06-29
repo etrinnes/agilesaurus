@@ -8,6 +8,8 @@ export interface VotingSession{
 export interface VoteModel{
     point: string;
     votes: number;
+    color?: string;
+    imagePath?: string;
 }
 
 export interface VoteOption{

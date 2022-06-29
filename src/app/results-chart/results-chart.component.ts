@@ -31,7 +31,7 @@ export class ResultsChartComponent implements OnInit {
 
   ngAfterViewInit(): void{
     google.charts.load("current", {packages:['corechart']});
-    google.charts.setOnLoadCallback(() => this.drawChart(this.voteData, this.colors));
+    google.charts.setOnLoadCallback(() => this.drawChart(this.voteData, this.colors, this.votingType));
   }
 
   initializeData() : any{
@@ -46,7 +46,7 @@ export class ResultsChartComponent implements OnInit {
     return this.voteData;
   }
 
-  drawChart(voteData: any, chartColors: string[]): void {
+  drawChart(voteData: any, chartColors: string[], votingType : VoteType): void {
     let data = google.visualization.arrayToDataTable(voteData);
     var view = new google.visualization.DataView(data);
     let chartObject = document.getElementById("columnchart_values");
@@ -63,7 +63,7 @@ export class ResultsChartComponent implements OnInit {
       };
       chart.draw(view, options);
 
-      if(this.votingType == VoteType.Dinos){
+      if(votingType == VoteType.Dinos){
         // add lil dino icons
         var chartContainer = document.getElementById("columnchart_values");
         if(chartContainer){
@@ -105,7 +105,7 @@ export class ResultsChartComponent implements OnInit {
 
 @HostListener('window:resize', ['$event'])
 onResize(event: any) {
-  this.drawChart(this.voteData, this.colors);
+  this.drawChart(this.voteData, this.colors, this.votingType);
 }
 
 }

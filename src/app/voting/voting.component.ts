@@ -14,7 +14,7 @@ import { ChartType } from 'angular-google-charts';
 export class VotingComponent implements OnInit {
   private currentSession: string;
   private currentUserId: string;
-  private votingType: VoteType;
+  votingType: VoteType;
   isOwner: boolean;
   statusText : string = "Loading";
   copyTitle : string = "Copy to Clipboard";

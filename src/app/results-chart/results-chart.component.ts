@@ -57,7 +57,8 @@ export class ResultsChartComponent implements OnInit {
         legend: { position: "none" },
         vAxis: {
           title: 'Votes',
-          scaleType: 'linear'
+          scaleType: 'linear',
+          format: '0'
       }
       };
       chart.draw(view, options);

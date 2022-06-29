@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { VotingService } from '../voting.service';
 
 @Component({
   selector: 'app-contact',
@@ -11,37 +13,49 @@ export class ContactComponent implements OnInit {
   email: string = "";
   subject: string = "";
   message: string = "";
-  isFormValid: boolean;
-  isNameValid: boolean;
-  isEmailValid: boolean;
   isMessageValid: boolean;
+  messageSent: boolean;
+  error : boolean = false;
+  statusMessage: string = "";
 
-  constructor() { }
+  constructor(private votingService : VotingService, private router : Router) { }
 
   ngOnInit(): void {
-    this.isFormValid = true;
-    this.isEmailValid = true;
-    this.isNameValid = true;
     this.isMessageValid = true;
+    this.messageSent = false;
+    this.error = false;
   }
 
   submit(): void{
-    this.isNameValid = this.name != "";
-    this.isEmailValid = this.email != "";
+    this.statusMessage = "";
     this.isMessageValid = this.message != "";
+    this.error = false;
 
-    if(this.name && this.email && this.subject && this.message){
-      // send email
+    if(this.message){
+      this.votingService.sendMessage(this.message, this.name).then((sessionId) => {
+        if(sessionId){
+          this.error = false;
+          this.messageSent = true;
+          this.statusMessage = "Message sent.";
+        }
+        else{
+          this.messageSent = false;
+          this.error = true;
+          this.statusMessage = "Error sending message. Please try again later";
+        }
+      });
     }
     else{
+      this.isMessageValid = this.message != "";
     }
-
   }
 
   optionChanged(): void{
-    this.isNameValid = this.name != "";
-    this.isEmailValid = this.email != "";
     this.isMessageValid = this.message != "";
+  }
+
+  goHome(): void{
+    this.router.navigateByUrl('/home');
   }
 
 }

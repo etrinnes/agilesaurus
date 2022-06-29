@@ -94,7 +94,7 @@ export class ResultsChartComponent implements OnInit {
       image.setAttributeNS(null, 'width', options.width);
       image.setAttributeNS('http://www.w3.org/1999/xlink', 'href', options.source);
 
-      let adjustedX = parseInt(options.x) - 20;
+      let adjustedX = parseInt(options.x) - 30;
       let adjustedY = parseInt(options.y) + 10;
       image.setAttributeNS(null, 'x', adjustedX.toString());
       image.setAttributeNS(null, 'y', adjustedY.toString());

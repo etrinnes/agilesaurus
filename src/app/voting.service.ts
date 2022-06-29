@@ -67,23 +67,25 @@ export class VotingService {
     return docSnap.exists();
   }
 
+  async sendMessage(enteredMessage: string = "", enteredName : string = "anonymous"){
+    try{
+      this.app = initializeApp(this.firebaseConfig);
+      this.db = getFirestore(this.app);
+      let docRef = await addDoc(collection(this.db, "messages"), {
+        name: enteredName,
+        message: enteredMessage,
+      });
+      return docRef.id;
+    }catch(e){
+      console.error("Error adding document: ", e);
+      return "";
+    }
+  }
+
   async createNewSession(sessionType: string = "fib"): Promise<string>{
 
     try{
-      // let votes = {
-      //   '1' : 0,
-      //   '2' : 0,
-      //   '3' : 0,
-      //   '5' : 0,
-      //   '8' : 0,
-      //   '13' : 0
-      // };
-
-      //let idk = {'1' : 0};
-      //let votes = [{'1' : 0}, {'2' : 0}, {'3' : 0}, {'5' : 0}, {'8' : 0}, {'13' : 0}];
-
       let votes = this.voteTypeService.getVoteModel(sessionType);
-      //let votes = [{point: '1', votes: 0}, {point: '2', votes: 0}, {point: '3', votes: 0}, {point: '5', votes: 0}, {point: '8', votes: 0}, {point: '13', votes: 0}];
 
       let docRef = await addDoc(collection(this.db, "sessions"), {
         sessionType: sessionType,
@@ -100,47 +102,24 @@ export class VotingService {
       console.error("Error adding document: ", e);
       return "";
     }
-
-    // set(ref(this.db, 'session'), {
-    //   sessionId
-    // });
-
-    // }).then(() => {
-    //   return true;
-    // })
-    // .catch((error) => {
-    //   return false;
-    // })
   }
 
   async updateSessionType(sessionId: string, sessionType: string = "fib"): Promise<string>{
     try{
-      // await addDoc(collection(this.db, "users"), {
-      //   userId: "blah" + randomInt(500)
-      // })
 
       let docRef = doc(this.db, "sessions", sessionId);
       setDoc(docRef, {sessionType: sessionType}, {merge: true});
 
-      // let docRef = await addDoc(collection(this.db, "sessions", sessionId), {
-      //   sessionType: sessionType
-      // })
       return docRef.id;
     }
     catch(e){
       console.error("Error adding doc ", e);
       return "";
     }
-    // set(ref(this.db, 'session/' + sessionId), {
-    //   userId: userId
-    // });
   }
 
   async addNewUser(sessionId: string, isOwner: boolean = false): Promise<string>{
     try{
-      // await addDoc(collection(this.db, "users"), {
-      //   userId: "blah" + randomInt(500)
-      // })
       let docRef = await addDoc(collection(this.db, "sessions", sessionId, "users"), {
         isOwner: isOwner
       })
@@ -153,10 +132,8 @@ export class VotingService {
         let currentNumberOfPlayers : number = data["numberOfPlayers"];
         let updatedValue = currentNumberOfPlayers + 1;
         setDoc(sessionDocRef, {numberOfPlayers: updatedValue}, {merge: true});
-        //this.userCount.next(updatedValue);
       }
 
-      //setDoc(sessionDocRef, {isActive: false}, {merge: true});
       return docRef.id;
     }
     catch(e){

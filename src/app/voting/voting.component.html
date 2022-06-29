@@ -25,7 +25,7 @@
     <div class="parent-container">
       <div *ngIf="!this.isSessionActive" class="container">
         <p  class="fs-3 text-center mt-3">Results:</p>
-        <results-chart [votes]="this.totalVotes"></results-chart>
+        <results-chart [votes]="this.totalVotes" [votingType]="this.voteType"></results-chart>
         <table class="table table-bordered table-striped table-results">
           <thead>
             <tr>

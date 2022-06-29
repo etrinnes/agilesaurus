@@ -1,6 +1,7 @@
 import { Component, HostListener, Input, OnInit } from '@angular/core';
 import { ChartType } from 'angular-google-charts';
-import { VoteModel } from '../session';
+import { VoteModel, VoteType } from '../session';
+import { VoteTypeService } from '../vote-type.service';
 
 @Component({
   selector: 'results-chart',
@@ -10,6 +11,7 @@ import { VoteModel } from '../session';
 export class ResultsChartComponent implements OnInit {
 
   @Input() votes : VoteModel[];
+  @Input() votingType : VoteType;
   colors: string[] = [];
   title = "Results";
   chartType = ChartType.ColumnChart;
@@ -19,14 +21,12 @@ export class ResultsChartComponent implements OnInit {
   width = 550;
   height = 400;
 
-  constructor() { }
+  constructor(private voteTypeService: VoteTypeService) { }
 
   ngOnInit(): void {
     this.initializeData();
-
     this.width = 1200;
     this.height = 700;
-
   }
 
   ngAfterViewInit(): void{
@@ -47,24 +47,11 @@ export class ResultsChartComponent implements OnInit {
   }
 
   drawChart(voteData: any, chartColors: string[]): void {
-    // let chartData : any[] = [];
-    // this.votes.forEach(vote => {
-    //   chartData.push([vote.point, vote.votes, vote.color]);
-    // });
-
     let data = google.visualization.arrayToDataTable(voteData);
     var view = new google.visualization.DataView(data);
-    // view.setColumns([0, 1,
-    //                  { calc: "stringify",
-    //                    sourceColumn: 1,
-    //                    type: "string",
-    //                    role: "annotation" },
-    //                  2]);
-
-   
-    let thing = document.getElementById("columnchart_values");
-    if(thing){
-      var chart = new google.visualization.ColumnChart(thing);
+    let chartObject = document.getElementById("columnchart_values");
+    if(chartObject){
+      var chart = new google.visualization.ColumnChart(chartObject);
       let options : any = {
         bar: {groupWidth: "95%"},
         legend: { position: "none" },
@@ -74,15 +61,50 @@ export class ResultsChartComponent implements OnInit {
       }
       };
       chart.draw(view, options);
+
+      if(this.votingType == VoteType.Dinos){
+        // add lil dino icons
+        var chartContainer = document.getElementById("columnchart_values");
+        if(chartContainer){
+          var svg = chartContainer.getElementsByTagName('svg')[0];
+          var barLabels = svg.querySelectorAll("text[text-anchor='middle']");
+  
+          for (var i = 0; i < barLabels.length; i++) {
+              var barArea : HTMLElement = barLabels[i] as HTMLElement;
+              if(barArea){
+                let x : string = barArea.getAttribute('x') as string;
+                let y : string = barArea.getAttribute('y') as string;
+  
+                let imagePath = this.voteTypeService.getImagePath(barLabels[i].innerHTML);
+                if(barLabels[i].innerHTML != "Votes"){
+                  (barLabels[i] as HTMLElement).style.paddingBottom = "20px";
+                  let icon = createImage({ source: imagePath, x: x, y: y, width: 50, height: 50 });
+                  barArea.parentElement?.appendChild(icon);
+                }
+              }
+          }
+        }
+      }
     }
 
+    function createImage(options: any) {
+      var image = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+      image.setAttributeNS(null, 'height', options.height);
+      image.setAttributeNS(null, 'width', options.width);
+      image.setAttributeNS('http://www.w3.org/1999/xlink', 'href', options.source);
+
+      let adjustedX = parseInt(options.x) - 20;
+      let adjustedY = parseInt(options.y) + 10;
+      image.setAttributeNS(null, 'x', adjustedX.toString());
+      image.setAttributeNS(null, 'y', adjustedY.toString());
+      image.setAttributeNS(null, 'visibility', 'visible');
+      return image;
+  }
 }
 
 @HostListener('window:resize', ['$event'])
 onResize(event: any) {
   this.drawChart(this.voteData, this.colors);
 }
-
-
 
 }

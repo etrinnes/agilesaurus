@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AnalyticsLoggingService, EventType } from '../analytics-logging.service';
 
 @Component({
   selector: 'app-about',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutComponent implements OnInit {
 
-  constructor() { }
+  constructor(private analyticsService : AnalyticsLoggingService) { }
 
   ngOnInit(): void {
+    this.analyticsService.initializeStuff();
+    this.analyticsService.logPageView("About");
   }
 
 }

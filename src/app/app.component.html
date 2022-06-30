@@ -304,7 +304,7 @@
   <div class="container">
     <nav class="navbar navbar-expand-lg bg-light py-3">
       <div class="container-fluid">
-          <a class="navbar-brand agile-header" href="#">
+          <a class="navbar-brand agile-header" href="#" (click)="logClickEvent('headerOption', 'Logo')">
             <img src="../assets/images/dino-tracks.svg" alt="" width="60" height="60" class="d-inline-block">
             Agilesaurus
           </a>
@@ -313,10 +313,10 @@
         </button>
         <div class="collapse navbar-collapse nav-menu" id="navbarNav">
           <div class="navbar-nav">
-            <a class="nav-link active fs-4 menu-header" aria-current="page" href="#">Home</a>
-            <a class="nav-link fs-4 menu-header" routerLink="/about">About</a>
-            <a class="nav-link fs-4 menu-header" routerLink="/faq">FAQ</a>
-            <a class="nav-link fs-4 menu-header" routerLink="/contact">Contact</a>
+            <a class="nav-link active fs-4 menu-header" aria-current="page" href="#" (click)="logClickEvent('headerOption', 'Home')">Home</a>
+            <a class="nav-link fs-4 menu-header" routerLink="/about" (click)="logClickEvent('headerOption', 'About')">About</a>
+            <a class="nav-link fs-4 menu-header" routerLink="/faq" (click)="logClickEvent('headerOption', 'FAQ')">FAQ</a>
+            <a class="nav-link fs-4 menu-header" routerLink="/contact" (click)="logClickEvent('headerOption', 'Contact')">Contact</a>
           </div>
         </div>
       </div>

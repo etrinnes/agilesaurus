@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AnalyticsLoggingService, EventType } from '../analytics-logging.service';
 
 @Component({
   selector: 'app-not-found',
@@ -9,7 +10,7 @@ export class NotFoundComponent implements OnInit {
 
   imagePath : string;
 
-  constructor() { }
+  constructor(private analyticsService : AnalyticsLoggingService) { }
 
   ngOnInit(): void {
     let randomNum =Math.floor(Math.random()*2);
@@ -20,6 +21,9 @@ export class NotFoundComponent implements OnInit {
       default:
         this.imagePath = "../../assets/images/dino-fossil.svg"
     }
+
+    this.analyticsService.initializeStuff();
+    this.analyticsService.logPageView("NotFound");
   }
 
 }

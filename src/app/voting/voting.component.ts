@@ -5,6 +5,7 @@ import { VoteModel, VoteOption, VoteType } from '../session';
 import { VoteTypeService } from '../vote-type.service';
 import * as bootstrap from "bootstrap";
 import { ChartType } from 'angular-google-charts';
+import { AnalyticsLoggingService, EventType } from '../analytics-logging.service';
 
 @Component({
   selector: 'app-voting',
@@ -30,7 +31,7 @@ export class VotingComponent implements OnInit {
   shouldDisplayCards: boolean;
   selectedVote : string;
 
-  constructor(private votingService: VotingService, private voteTypeService: VoteTypeService, private router: Router, private route: ActivatedRoute) { 
+  constructor(private votingService: VotingService, private voteTypeService: VoteTypeService, private router: Router, private route: ActivatedRoute, private analyticsService : AnalyticsLoggingService) { 
     let stuff : any = this.router.getCurrentNavigation()?.extras.state;
     this.currentSession = stuff?.id;
     this.isOwner = stuff?.isOwner;
@@ -40,6 +41,8 @@ export class VotingComponent implements OnInit {
 
   ngOnInit(): void {
    this.selectedVote = "";
+   this.analyticsService.initializeStuff();
+   this.analyticsService.logPageView("Voting");
    let savedSession = this.getCookieValue("agilesaurusSessionId");
    let savedUserId = this.getCookieValue("agilesaurusUserId");
    let savedisOwner = this.getCookieValue("agilesaurusIsOwner");
@@ -123,11 +126,13 @@ export class VotingComponent implements OnInit {
   }
 
   addVote(vote: string) : void{
+    this.analyticsService.logEvent(EventType.SelectContent, "voteOption", vote);
     this.selectedVote = vote;
     this.votingService.addVote(this.currentSession, this.currentUserId, vote);
   }
 
   endVotingSession(): void{
+    this.analyticsService.logEvent(EventType.SelectContent, "button", "EndVotingSession");
     this.votingService.endSession(this.currentSession).then((isSuccess) => {
       if(isSuccess){
         this.isSessionActive = false;
@@ -136,6 +141,7 @@ export class VotingComponent implements OnInit {
   }
 
   resetVotes(): void{
+    this.analyticsService.logEvent(EventType.SelectContent, "button", "ResetVotes");
     this.isLoading = true;
     this.votingService.resetVotes(this.currentSession).then((status : boolean) => {
       this.isLoading = false;

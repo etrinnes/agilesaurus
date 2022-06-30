@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AnalyticsLoggingService, EventType } from '../analytics-logging.service';
 import { VotingService } from '../voting.service';
 
 @Component({
@@ -18,15 +19,18 @@ export class ContactComponent implements OnInit {
   error : boolean = false;
   statusMessage: string = "";
 
-  constructor(private votingService : VotingService, private router : Router) { }
+  constructor(private votingService : VotingService, private router : Router, private analyticsService : AnalyticsLoggingService) { }
 
   ngOnInit(): void {
     this.isMessageValid = true;
     this.messageSent = false;
     this.error = false;
+    this.analyticsService.initializeStuff();
+    this.analyticsService.logPageView("Contact");
   }
 
   submit(): void{
+    this.analyticsService.logEvent(EventType.SelectContent, "button", "SubmitEmail");
     this.statusMessage = "";
     this.isMessageValid = this.message != "";
     this.error = false;

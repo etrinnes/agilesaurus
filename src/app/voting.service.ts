@@ -9,9 +9,6 @@ import { VoteModel, VoteType, VotingSession } from './session';
 import { VoteTypeService } from './vote-type.service';
 import { environment } from 'src/environments/environment';
 
-// @Injectable({
-//   providedIn: 'root'
-// })
 @Injectable()
 export class VotingService {
 
@@ -35,11 +32,6 @@ export class VotingService {
   public sessionModel : VotingSession;
 
   constructor(private voteTypeService: VoteTypeService) { }
-
-
-  // https://firebase.google.com/docs/database/web/read-and-write
-
-  // https://firebase.google.com/docs/firestore/manage-data/add-data
 
   initializeStuff(): void{
 
@@ -167,12 +159,9 @@ export class VotingService {
 
 
       let docRef = doc(this.db, "sessions", sessionId);
-      
-      //let votes = [{point: '1', votes: 0}, {point: '2', votes: 0}, {point: '3', votes: 0}, {point: '5', votes: 0}, {point: '8', votes: 0}, {point: '13', votes: 0}];
       let sessionType = await this.getSessionType(sessionId);
       let votes = this.voteTypeService.getVoteModel(sessionType);
       let voteCount = 0;
-
 
       await updateDoc(docRef, {totalVotes: votes});
       await updateDoc(docRef, {numberOfVotes: 0});
@@ -232,7 +221,6 @@ export class VotingService {
         this.sessionModel.voteCount = data["numberOfVotes"];
         this.sessionData.next(this.sessionModel);
       } 
-      //return;
     });
   }
 
@@ -240,14 +228,12 @@ export class VotingService {
   async updateVoteTotals(sessionId: string, submittedVote: number | string): Promise<boolean>{
     try{
 
-      //let votes : VoteModel[] = [{point: '1', votes: 0}, {point: '2', votes: 0}, {point: '3', votes: 0}, {point: '5', votes: 0}, {point: '8', votes: 0}, {point: '13', votes: 0}];
       let sessionType = await this.getSessionType(sessionId);
       let votes = this.voteTypeService.getVoteModel(sessionType);
       let numberOfVotes = 0;
 
       let querySnapshot = await getDocs(collection(this.db, "sessions", sessionId, "users"));
       querySnapshot.forEach((doc) => {
-        // doc.data() is never undefined for query doc snapshots
         console.log(doc.id, " => ", doc.data());
         let data = doc.data();
         let vote : string = data['vote'];
@@ -258,8 +244,6 @@ export class VotingService {
             numberOfVotes++;
           }
         })
-
-        //votes[vote.toString()] = votes[vote.toString()] + 1;
       });
       
 
@@ -268,15 +252,9 @@ export class VotingService {
       let docSnap = await getDoc(docRef);
       if (docSnap.exists()) {
         let data = docSnap.data();
-        //let totalVotes = data["totalVotes"];
-        //totalVotes[submittedVote] = totalVotes[submittedVote] + 1;
-
-        //this.voteCount.next(numberOfVotes);
-
         setDoc(docRef, {totalVotes: votes, numberOfVotes: numberOfVotes}, {merge: true});
         return true;
       }
-      //console.log("data in updateVoteTotals: " + data);
       return false;
     }
     catch(e){

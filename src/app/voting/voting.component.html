@@ -21,7 +21,7 @@
     <p *ngIf="this.isSessionActive" class="fs-2 text-center mt-5 header-text">Select your vote for the current work item size:</p>
     <p *ngIf="!this.isSessionActive" class="fs-2 text-center mt-5 header-text">Session owner has ended voting.</p>
     <div class="parent-container">
-      <div *ngIf="!this.isSessionActive && this.isOwner" class="container">
+      <div *ngIf="!this.isSessionActive" class="container">
         <p  class="fs-3 text-center mt-3">Results:</p>
         <results-chart [votes]="this.totalVotes" [votingType]="this.votingType"></results-chart>
         <table class="table table-bordered table-striped table-results">

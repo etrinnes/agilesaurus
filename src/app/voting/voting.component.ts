@@ -13,8 +13,8 @@ import { AnalyticsLoggingService, EventType } from '../analytics-logging.service
   styleUrls: ['./voting.component.scss']
 })
 export class VotingComponent implements OnInit {
-  private currentSession: string;
   private currentUserId: string;
+  currentSession: string;
   votingType: VoteType;
   isOwner: boolean;
   statusText : string = "Loading";
@@ -126,16 +126,20 @@ export class VotingComponent implements OnInit {
   }
 
   addVote(vote: string) : void{
-    this.analyticsService.logEvent(EventType.SelectContent, "voteOption", vote);
-    this.selectedVote = vote;
-    this.votingService.addVote(this.currentSession, this.currentUserId, vote);
+   if(this.isSessionActive){
+      this.analyticsService.logEvent(EventType.SelectContent, "voteOption", vote);
+      this.selectedVote = vote;
+      this.votingService.addVote(this.currentSession, this.currentUserId, vote);
+   }
   }
 
   endVotingSession(): void{
     this.analyticsService.logEvent(EventType.SelectContent, "button", "EndVotingSession");
+    this.isLoading = true;
     this.votingService.endSession(this.currentSession).then((isSuccess) => {
       if(isSuccess){
         this.isSessionActive = false;
+        this.isLoading = false;
       }
     })
   }
@@ -157,7 +161,6 @@ export class VotingComponent implements OnInit {
       this.numberOfSubmittedVotes = val.voteCount;
       this.isSessionActive = val.isActive;
       this.totalVotes = val.votes;
-
       if(!this.isSessionActive){
         this.selectedVote = "";
       }

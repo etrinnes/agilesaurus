@@ -234,7 +234,7 @@ export class VotingService {
 
       let querySnapshot = await getDocs(collection(this.db, "sessions", sessionId, "users"));
       querySnapshot.forEach((doc) => {
-        console.log(doc.id, " => ", doc.data());
+        // console.log(doc.id, " => ", doc.data());
         let data = doc.data();
         let vote : string = data['vote'];
 

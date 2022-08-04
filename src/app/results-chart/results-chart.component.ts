@@ -1,4 +1,4 @@
-import { Component, HostListener, Input, OnInit } from '@angular/core';
+import { Component, HostListener, Input, OnInit, SimpleChanges } from '@angular/core';
 import { ChartType } from 'angular-google-charts';
 import { VoteModel, VoteType } from '../session';
 import { VoteTypeService } from '../vote-type.service';
@@ -12,6 +12,8 @@ export class ResultsChartComponent implements OnInit {
 
   @Input() votes : VoteModel[];
   @Input() votingType : VoteType;
+  isAfterViewInit : boolean;
+  isLoading : boolean;
   colors: string[] = [];
   title = "Results";
   chartType = ChartType.ColumnChart;
@@ -24,14 +26,29 @@ export class ResultsChartComponent implements OnInit {
   constructor(private voteTypeService: VoteTypeService) { }
 
   ngOnInit(): void {
+    this.isAfterViewInit = false;
+    this.isLoading = true;
     this.initializeData();
     this.width = 1200;
     this.height = 700;
   }
 
   ngAfterViewInit(): void{
+    this.isAfterViewInit = true;
+    this.isLoading = true;
     google.charts.load("current", {packages:['corechart']});
     google.charts.setOnLoadCallback(() => this.drawChart(this.voteData, this.colors, this.votingType));
+  }
+
+  ngOnChanges(changes: SimpleChanges){
+    if(this.isAfterViewInit){
+      this.isLoading = true;
+      // console.log("anything changed??? " + changes['votes'].currentValue);
+      this.votes = changes['votes'].currentValue;
+      this.voteData = [];
+      this.initializeData();
+      this.drawChart(this.voteData, this.colors, this.votingType);
+    }
   }
 
   initializeData() : any{
@@ -47,6 +64,7 @@ export class ResultsChartComponent implements OnInit {
   }
 
   drawChart(voteData: any, chartColors: string[], votingType : VoteType): void {
+    this.isLoading = false;
     let data = google.visualization.arrayToDataTable(voteData);
     var view = new google.visualization.DataView(data);
     let chartObject = document.getElementById("columnchart_values");
